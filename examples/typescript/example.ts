@@ -1,10 +1,11 @@
-import twilio = require('../../');
+// import twilio = require('../../');
+import { RestClient } from '../../'
 import {MessageListInstanceCreateOptions} from '../../lib/rest/api/v2010/account/message';
 
 const accountSid: string = process.env.TWILIO_ACCOUNT_SID || '';
 const token: string = process.env.TWILIO_AUTH_TOKEN || '';
 
-const client = twilio(accountSid, token);
+const client = RestClient(accountSid, token);
 
 let i: number = 0;
 client.calls.each({
@@ -127,6 +128,6 @@ promiseMessage.then(messages => {
   });
 });
 
-const twiml = new twilio.twiml.VoiceResponse();
+const twiml = new RestClient.LaML.VoiceResponse();
 twiml.dial({}, '+12345678901');
 twiml.play('https://demo.twilio.com/docs/classic.mp3');
