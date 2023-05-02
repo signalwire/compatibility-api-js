@@ -1,24 +1,25 @@
 {
-  "name": "twilio",
-  "description": "A Twilio helper library",
-  "version": "3.77.0",
-  "author": "API Team <api@twilio.com>",
-  "contributors": [
-    {
-      "name": "twilio-node contributors",
-      "url": "https://github.com/twilio/twilio-node/graphs/contributors"
-    }
-  ],
+  "name": "@signalwire/compatibility-api",
+  "description": "SignalWire Compatibility API",
+  "author": "SignalWire Team <open.source@signalwire.com>",
+  "license": "MIT",
+  "version": "3.0.5",
   "keywords": [
-    "twilio",
+    "signalwire",
+    "voice",
+    "laml",
     "sms",
     "rest",
     "api"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/twilio/twilio-node.git"
+    "url": "https://github.com/signalwire/compatibility-api-js"
   },
+  "bugs": {
+    "url": "https://github.com/signalwire/compatibility-api-js/issues"
+  },
+  "homepage": "https://github.com/signalwire/compatibility-api-js/tree/master/packages/compatibility-api",
   "dependencies": {
     "axios": "^0.26.1",
     "dayjs": "^1.8.29",
@@ -65,9 +66,8 @@
     "index.d.ts"
   ],
   "main": "./lib",
-  "types": "./index.d.ts",
+  "types": "./compatibility-api.d.ts",
   "engines": {
-    "node": ">=6.0"
-  },
-  "license": "MIT"
+    "node": ">=12"
+  }
 }
