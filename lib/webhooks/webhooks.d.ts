@@ -54,13 +54,13 @@ export interface WebhookOptions {
 /**
  * Utility function to validate an incoming request is indeed from Twilio
  *
- * @param authToken - The auth token, as seen in the Twilio portal
+ * @param signingKey - The signing key, as seen in the SignalWire portal
  * @param signalWireHeader - The value of the X-Twilio-Signature or X-SignalWire-Signature header from the request
  * @param url - The full URL (with query string) you configured to handle this request
  * @param params - the parameters sent with this request
  */
 export function validateRequest(
-  authToken: string,
+  signingKey: string,
   signalWireHeader: string,
   url: string,
   params: Record<string, any>
@@ -70,12 +70,12 @@ export function validateRequest(
 /**
  * Utility function to get the expected signature for a given request
  *
- * @param authToken - The auth token, as seen in the Twilio portal
+ * @param signingKey - The signing key, as seen in the SignalWire portal
  * @param url - The full URL (with query string) you configured to handle this request
  * @param params - the parameters sent with this request
  */
 export function getExpectedTwilioSignature(
-  authToken: string,
+  signingKey: string,
   url: string,
   params: Record<string, any>
 ): string;
@@ -91,13 +91,13 @@ export function getExpectedBodyHash(body: string): string;
  * Utility function to validate an incoming request is indeed from Twilio. This also validates
  * the request body against the bodySHA256 post parameter.
  *
- * @param authToken - The auth token, as seen in the Twilio Portal
+ * @param signingKey - The signing key, as seen in the SignalWire portal
  * @param signalWireHeader - The value of the X-Twilio-Signature or X-SignalWire-Signature header from the request
  * @param requestUrl - The full URL (with query string) you configured to handle this request
  * @param body - The body of the request
  */
 export function validateRequestWithBody(
-  authToken: string,
+  signingKey: string,
   signalWireHeader: string,
   requestUrl: string,
   body: string
@@ -108,12 +108,12 @@ export function validateRequestWithBody(
  * adapted from https://github.com/crabasa/twiliosig
  *
  * @param request - An expressjs request object (http://expressjs.com/api.html#req.params)
- * @param authToken - The auth token, as seen in the Twilio portal
+ * @param signingKey - The signing key, as seen in the SignalWire portal
  * @param opts - options for request validation
  */
 export function validateExpressRequest(
   request: Request,
-  authToken: string,
+  signingKey: string,
   opts?: RequestValidatorOptions
 ): boolean;
 
