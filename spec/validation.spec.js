@@ -164,7 +164,7 @@ describe('Request validation middleware', () => {
     protocol: fullUrl.protocol,
     host: fullUrl.host,
     headers: {
-      'X-Twilio-Signature': defaultSignature,
+      'X-SignalWire-Signature': defaultSignature,
       host: fullUrl.host,
     },
     url: fullUrl.pathname + fullUrl.search,
@@ -279,7 +279,7 @@ describe('Request validation middleware', () => {
       originalUrl: requestUrlWithHash.substring(requestUrlWithHash.indexOf('.com/') + 4),
       body,
       headers: Object.assign({}, defaultRequest.headers, {
-        'X-Twilio-Signature': requestUrlWithHashSignature,
+        'X-SignalWire-Signature': requestUrlWithHashSignature,
       }),
     }));
 
@@ -300,7 +300,7 @@ describe('Request validation middleware', () => {
       originalUrl: requestUrlWithHash.substring(requestUrlWithHash.indexOf('.com/') + 4).slice(0, -1),
       body,
       headers: Object.assign({}, defaultRequest.headers, {
-        'X-Twilio-Signature': requestUrlWithHashSignature,
+        'X-SignalWire-Signature': requestUrlWithHashSignature,
       }),
     }));
 

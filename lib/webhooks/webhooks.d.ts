@@ -55,13 +55,13 @@ export interface WebhookOptions {
  * Utility function to validate an incoming request is indeed from Twilio
  *
  * @param authToken - The auth token, as seen in the Twilio portal
- * @param twilioHeader - The value of the X-Twilio-Signature header from the request
+ * @param signalWireHeader - The value of the X-Twilio-Signature or X-SignalWire-Signature header from the request
  * @param url - The full URL (with query string) you configured to handle this request
  * @param params - the parameters sent with this request
  */
 export function validateRequest(
   authToken: string,
-  twilioHeader: string,
+  signalWireHeader: string,
   url: string,
   params: Record<string, any>
 ): boolean;
@@ -92,13 +92,13 @@ export function getExpectedBodyHash(body: string): string;
  * the request body against the bodySHA256 post parameter.
  *
  * @param authToken - The auth token, as seen in the Twilio Portal
- * @param twilioHeader - The value of the X-Twilio-Signature header from the request
+ * @param signalWireHeader - The value of the X-Twilio-Signature or X-SignalWire-Signature header from the request
  * @param requestUrl - The full URL (with query string) you configured to handle this request
  * @param body - The body of the request
  */
 export function validateRequestWithBody(
   authToken: string,
-  twilioHeader: string,
+  signalWireHeader: string,
   requestUrl: string,
   body: string
 ): boolean;
