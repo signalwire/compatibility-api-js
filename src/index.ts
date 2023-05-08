@@ -1,7 +1,7 @@
-import twilio from '../lib'
+const twilio = require('../lib')
 import { getHost, Reject } from './helpers'
-import type { Twilio, TwimlInterface, JwtInterface } from '../index'
-import type { CompatibilityAPIRestClientOptions, RestClient as RC } from '../compatibility-api'
+import { Twilio, TwimlInterface, JwtInterface } from '../index'
+import { CompatibilityAPIRestClientOptions, RestClient as RC } from '../compatibility-api'
 
 twilio.twiml.FaxResponse.prototype.reject = function (attributes: any) {
   return new Reject(this.response.ele('Reject', attributes))
@@ -45,7 +45,7 @@ for (let i = 0; i < properties.length; i++) {
 
 export { RestClient }
 
-export type {
+export {
   CompatibilityAPIRestClientOptions,
   Twilio,
   TwimlInterface,

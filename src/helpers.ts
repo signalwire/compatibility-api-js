@@ -1,4 +1,4 @@
-import twilio from '../lib'
+const twilio = require('../lib')
 
 function Reject(reject: any) {
   this.reject = reject
