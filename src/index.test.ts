@@ -12,6 +12,22 @@ describe('It generate LaML', () => {
     )
   })
 
+  it('should generate LaML with <AI>', () => {
+    const response = new RestClient.LaML.VoiceResponse();
+    const connect = response.connect();
+    const ai = connect.ai();
+    ai.setEngine('gcloud');
+
+    const prompt = ai.prompt('prompt1')
+    prompt.setTemperature(0.2)
+    
+    ai.postPrompt('prompt2');
+
+    expect(response.toString()).toEqual(
+      `<?xml version="1.0" encoding="UTF-8"?><Response><Connect><AI engine="gcloud"><Prompt temperature="0.2">prompt1</Prompt><PostPrompt>prompt2</PostPrompt></AI></Connect></Response>`
+    )
+  })
+
   it('LaML to receive a fax', () => {
     const response = new RestClient.LaML.FaxResponse()
     response.receive({ action: '/receive/fax' })

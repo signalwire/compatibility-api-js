@@ -1,10 +1,20 @@
 const twilio = require('../lib')
-import { getHost, Reject } from './helpers'
+import { getHost, Reject, AI } from './helpers'
 import { Twilio, TwimlInterface, JwtInterface } from '../index'
 import { CompatibilityAPIRestClientOptions, RestClient as RC } from '../compatibility-api'
 
 twilio.twiml.FaxResponse.prototype.reject = function (attributes: any) {
   return new Reject(this.response.ele('Reject', attributes))
+}
+
+const connectRef = twilio.twiml.VoiceResponse.prototype.connect
+twilio.twiml.VoiceResponse.prototype.connect = function (attributes) {
+  const self = this;
+  const connect = connectRef.call(self, attributes)
+  connect.ai = () => {
+    return new AI(connect.connect.ele('AI', attributes));
+  }
+  return connect
 }
 
 /** @remarks See index.d.ts for types */
