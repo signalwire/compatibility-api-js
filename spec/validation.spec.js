@@ -324,4 +324,18 @@ describe('Request validation middleware', () => {
 
     expect(response.statusCode).toEqual(400);
   });
+
+  it('should also work with SignalWire signature', (done) => {
+    const request = httpMocks.createRequest(Object.assign({}, defaultRequest, {
+      headers: Object.assign({}, defaultRequest.headers, {
+        'X-SignalWire-Signature': defaultSignature,
+      }),
+    }));
+
+    middleware(request, response, () => {
+      done();
+    });
+
+    expect(response.statusCode).toEqual(200);
+  });
 });

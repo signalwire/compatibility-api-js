@@ -1,7 +1,7 @@
-import type { Twilio, TwimlInterface, JwtInterface } from './index'
+import { Twilio, TwimlInterface, JwtInterface } from './index'
 import * as webhookTools from './lib/webhooks/webhooks'
-import TwilioClient from './lib/rest/Twilio'
-import RequestClient from './lib/base/RequestClient'
+import TwilioClient = require('./lib/rest/Twilio')
+import RequestClient = require('./lib/base/RequestClient')
 import {
   CallListInstance,
   CallInstance,
