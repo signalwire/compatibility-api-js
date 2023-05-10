@@ -164,7 +164,7 @@ describe('Request validation middleware', () => {
     protocol: fullUrl.protocol,
     host: fullUrl.host,
     headers: {
-      'X-SignalWire-Signature': defaultSignature,
+      'X-Twilio-Signature': defaultSignature,
       host: fullUrl.host,
     },
     url: fullUrl.pathname + fullUrl.search,
@@ -279,7 +279,7 @@ describe('Request validation middleware', () => {
       originalUrl: requestUrlWithHash.substring(requestUrlWithHash.indexOf('.com/') + 4),
       body,
       headers: Object.assign({}, defaultRequest.headers, {
-        'X-SignalWire-Signature': requestUrlWithHashSignature,
+        'X-Twilio-Signature': requestUrlWithHashSignature,
       }),
     }));
 
@@ -300,7 +300,7 @@ describe('Request validation middleware', () => {
       originalUrl: requestUrlWithHash.substring(requestUrlWithHash.indexOf('.com/') + 4).slice(0, -1),
       body,
       headers: Object.assign({}, defaultRequest.headers, {
-        'X-SignalWire-Signature': requestUrlWithHashSignature,
+        'X-Twilio-Signature': requestUrlWithHashSignature,
       }),
     }));
 
@@ -323,5 +323,19 @@ describe('Request validation middleware', () => {
     });
 
     expect(response.statusCode).toEqual(400);
+  });
+
+  it('should also work with SignalWire signature', (done) => {
+    const request = httpMocks.createRequest(Object.assign({}, defaultRequest, {
+      headers: Object.assign({}, defaultRequest.headers, {
+        'X-SignalWire-Signature': defaultSignature,
+      }),
+    }));
+
+    middleware(request, response, () => {
+      done();
+    });
+
+    expect(response.statusCode).toEqual(200);
   });
 });
