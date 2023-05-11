@@ -58,14 +58,21 @@
     "coverage": "nyc npm test",
     "jsdoc": "jsdoc -r lib -d docs",
     "nsp": "if [ `npm --version | cut -d'.' -f1` -ge \"6\" ]; then npm audit --production; else echo \"npm audit is not available for npm < 6.0\"; fi",
-    "nyc": "if [ `node --version | cut -d'.' -f1 | cut -c2-` -ge \"8\" ]; then npm run coverage; else npm test; fi"
+    "nyc": "if [ `node --version | cut -d'.' -f1 | cut -c2-` -ge \"8\" ]; then npm run coverage; else npm test; fi",
+    "tsc": "tsc -p tsconfig.cjs.json",
+    "tsc:esm": "tsc -p tsconfig.esm.json",
+    "build": "npm run tsc && npm run tsc:esm"
   },
   "files": [
     "lib",
     "index.js",
     "index.d.ts"
   ],
-  "main": "./lib",
+  "main": "dist-cjs/index.js",
+  "exports": {
+    "require": "./dist-cjs/index.js",
+    "default": "./dist-esm/index.js"
+  },
   "types": "./compatibility-api.d.ts",
   "engines": {
     "node": ">=12"

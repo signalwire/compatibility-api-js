@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "dist-esm",
+    "target": "ESNext",
+    "lib": [
+      "ESNext", "DOM"
+    ],
+    "module": "ESNext",
+    "moduleResolution": "Node",
+  },
+  "include": ["./src/**/*.ts"],
+  "exclude": ["**/*.test.ts"]
+}
