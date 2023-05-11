@@ -2,13 +2,20 @@ import { Twilio, TwimlInterface, JwtInterface } from './index'
 import * as webhookTools from './lib/webhooks/webhooks'
 import TwilioClient = require('./lib/rest/Twilio')
 import RequestClient = require('./lib/base/RequestClient')
+import VoiceResponseTwilio = require('./lib/twiml/VoiceResponse')
 import {
   CallListInstance,
   CallInstance,
   CallListInstanceCreateOptions,
 } from './lib/rest/api/v2010/account/call'
-import VoiceResponseTwilio = require('./lib/twiml/VoiceResponse')
-import { AIAttributes, AIPromptAttributes, AIPostPromptAttributes } from './src/types'
+import {
+  AIAttributes,
+  AIPromptAttributes,
+  AIPostPromptAttributes,
+  LanguageAttributes,
+  DefaultsAttributes,
+  FunctionAttributes,
+} from './src/types'
 
 export interface CompatibilityAPIRestClientOptions
   extends Twilio.TwilioClientOptions {
@@ -134,6 +141,18 @@ declare namespace VoiceResponse {
      * @param text - Text in post prompt
      */
     postPrompt(attributes?: AIPostPromptAttributes, text?: string): VoiceResponse.AIPostPrompt
+    /**
+     * <Languages> TwiML Noun
+     *
+     * @param attributes - TwiML attributes
+     */
+    languages(attributes?: any): VoiceResponse.Languages
+    /**
+     * <SWAIG> TwiML Noun
+     *
+     * @param attributes - TwiML attributes
+     */
+    swaig(attributes?: any): VoiceResponse.SWAIG
   }
 
   class AIPrompt {
@@ -182,6 +201,127 @@ declare namespace VoiceResponse {
   }
 
   class AIPostPrompt extends AIPrompt {}
+
+  class Languages {
+    /**
+     * <Langauge> TwiML Noun
+     *
+     * @param attributes - TwiML attributes
+     */
+    language(attributes?: LanguageAttributes): VoiceResponse.Language
+  }
+
+  class Language {
+    /**
+     * Add code attribute
+     *
+     * @param code - string
+     */
+    setCode(code: string): void
+    /**
+     * Add name attribute
+     *
+     * @param name - string
+     */
+    setName(name: string): void
+    /**
+     * Add voice attribute
+     *
+     * @param voice - string
+     */
+    setVoice(voice: string): void
+  }
+
+  class SWAIG {
+    /**
+     * <Defaults> TwiML Noun
+     *
+     * @param attributes - TwiML attributes
+     */
+    defaults(attribute?: DefaultsAttributes): VoiceResponse.Defaults
+    /**
+     * <Function> TwiML Noun
+     *
+     * @param attributes - TwiML attributes
+     */
+    function(attribute?: FunctionAttributes): VoiceResponse.Function
+  }
+
+  class Defaults {
+    /**
+     * Add webHookURL attribute
+     *
+     * @param webHookURL - string
+     */
+    setWebHookURL(webHookURL: string): void
+    /**
+     * Add webHookAuthUser attribute
+     *
+     * @param webHookAuthUser - string
+     */
+    setWebHookAuthUser(webHookAuthUser: string): void
+    /**
+     * Add webHookAuthPass attribute
+     *
+     * @param webHookAuthPass - string
+     */
+    setWebHookAuthPass(webHookAuthPass: string): void
+    /**
+     * <name> TwiML Noun
+     *
+     * @param name - string
+     * @param value - string
+     */
+    addMetaData(name: string, value: string): VoiceResponse.Metadata
+  }
+
+  class Function {
+    /**
+     * Add name attribute
+     *
+     * @param name - string
+     */
+    setName(name: string): void
+    /**
+     * Add argument attribute
+     *
+     * @param argument - string
+     */
+    setArgument(argument: string): void
+    /**
+     * Add purpose attribute
+     *
+     * @param purpose - string
+     */
+    setPurpose(purpose: string): void
+    /**
+     * Add webHookURL attribute
+     *
+     * @param webHookURL - string
+     */
+    setWebHookURL(webHookURL: string): void
+    /**
+     * Add webHookAuthUser attribute
+     *
+     * @param webHookAuthUser - string
+     */
+    setWebHookAuthUser(webHookAuthUser: string): void
+    /**
+     * Add webHookAuthPass attribute
+     *
+     * @param webHookAuthPass - string
+     */
+    setWebHookAuthPass(webHookAuthPass: string): void
+    /**
+     * <name> TwiML Noun
+     *
+     * @param name - string
+     * @param value - string
+     */
+    addMetaData(name: string, value: string): VoiceResponse.Metadata
+  }
+
+  class Metadata {}
 }
 
 interface TwimlConstructor<T> {

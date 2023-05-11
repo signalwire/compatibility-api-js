@@ -9,7 +9,7 @@ twilio.twiml.FaxResponse.prototype.reject = function (attributes: any) {
 }
 
 const connectRef = twilio.twiml.VoiceResponse.prototype.connect
-twilio.twiml.VoiceResponse.prototype.connect = function (attributes) {
+twilio.twiml.VoiceResponse.prototype.connect = function (attributes: any) {
   const self = this;
   const connect = connectRef.call(self, attributes)
   connect.ai = (aIAttributes?: AIAttributes) => {
