@@ -1,9 +1,0 @@
-{
-  "compilerOptions": {
-    "outDir": "dist-cjs",
-    "module": "CommonJS",
-    "target": "ES2015"
-  },
-  "include": ["./src/**/*.ts"],
-  "exclude": ["**/*.test.ts"]
-}

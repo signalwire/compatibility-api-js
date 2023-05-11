@@ -115,7 +115,7 @@ const getHost = (opts: { signalwireSpaceUrl?: string } = {}): string => {
     return SIGNALWIRE_API_HOSTNAME
   }
   throw new Error(
-    'SignalWire Space URL is not configured.\nEnter your SignalWire Space domain via the SIGNALWIRE_SPACE_URL or SIGNALWIRE_API_HOSTNAME environment variables, or specifying the property "signalwireSpaceUrl" in the init options.',
+    'SignalWire Space URL is not configured.\nEnter your SignalWire Space domain via the SIGNALWIRE_SPACE_URL or SIGNALWIRE_API_HOSTNAME environment variables, or specifying the property "signalwireSpaceUrl" in the init options.'
   )
 }
 
