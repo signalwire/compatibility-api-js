@@ -15,16 +15,16 @@ describe('It generate LaML', () => {
   it('should generate LaML with <AI>', () => {
     const response = new RestClient.LaML.VoiceResponse();
     const connect = response.connect();
-    const ai = connect.ai();
+    const ai = connect.ai({ voice: 'en-US-Neural2-J' });
     ai.setEngine('gcloud');
 
     const prompt = ai.prompt('prompt1')
     prompt.setTemperature(0.2)
     
-    ai.postPrompt('prompt2');
+    ai.postPrompt({ topP: 0.5 }, 'prompt2');
 
     expect(response.toString()).toEqual(
-      `<?xml version="1.0" encoding="UTF-8"?><Response><Connect><AI engine="gcloud"><Prompt temperature="0.2">prompt1</Prompt><PostPrompt>prompt2</PostPrompt></AI></Connect></Response>`
+      `<?xml version="1.0" encoding="UTF-8"?><Response><Connect><AI voice="en-US-Neural2-J" engine="gcloud"><Prompt temperature="0.2">prompt1</Prompt><PostPrompt topP="0.5">prompt2</PostPrompt></AI></Connect></Response>`
     )
   })
 

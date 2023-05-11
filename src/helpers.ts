@@ -1,6 +1,6 @@
 const twilio = require('../lib')
 import TwiML from '../lib/twiml/TwiML'
-import { Connect } from '../lib/twiml/VoiceResponse'
+import { AIPostPromptAttributes, AIPromptAttributes } from './types'
 
 function Reject(reject: any) {
   this.reject = reject
@@ -17,28 +17,34 @@ function AI(aiElement: Element) {
     this.ai.att('engine', engine)
   }
 
-  this.setVoice = (voice) => {
+  this.setVoice = (voice: string) => {
     this.ai.att('voice', voice)
   }
 
-  this.setPostPromptURL = (postPromptURL) => {
+  this.setPostPromptURL = (postPromptURL: string) => {
     this.ai.att('postPromptURL', postPromptURL)
   }
 
-  this.setPostPromptAuthUser = (postPromptAuthUser) => {
+  this.setPostPromptAuthUser = (postPromptAuthUser: string) => {
     this.ai.att('postPromptAuthUser', postPromptAuthUser)
   }
 
-  this.setPostPromptAuthPassword = (postPromptAuthPassword) => {
+  this.setPostPromptAuthPassword = (postPromptAuthPassword: string) => {
     this.ai.att('postPromptAuthPassword', postPromptAuthPassword)
   }
 
-  this.setHints = (hints) => {
+  this.setHints = (hints: string) => {
     this.ai.att('hints', hints)
   }
 
-  this.prompt = (text: string) => {
+  this.prompt = (text?: string) => {
     const promptElement = this.ai.ele('Prompt', text)
+    const promptInstance = new Prompt(promptElement)
+    return promptInstance
+  }
+
+  this.prompt = (attributes?: AIPromptAttributes, text?: string) => {
+    const promptElement = this.ai.ele('Prompt', attributes, text)
     const promptInstance = new Prompt(promptElement)
     return promptInstance
   }
@@ -48,51 +54,53 @@ function AI(aiElement: Element) {
     const postPromptInstance = new PostPrompt(postPromptElement)
     return postPromptInstance
   }
+
+  this.postPrompt = (attributes: AIPostPromptAttributes, text?: string) => {
+    const postPromptElement = this.ai.ele('PostPrompt', attributes, text)
+    const postPromptInstance = new PostPrompt(postPromptElement)
+    return postPromptInstance
+  }
 }
-AI.prototype = Object.create(TwiML.prototype);
-AI.prototype.constructor = AI;
+AI.prototype = Object.create(TwiML.prototype)
+AI.prototype.constructor = AI
 
 function Prompt(promptElement: Element) {
   this.prompt = promptElement
   this._propertyName = 'prompt'
 
-  this.setTemperature = (temperature) => {
+  this.setTemperature = (temperature: number) => {
     return this.prompt.att('temperature', temperature)
   }
 
-  this.setTopP = (topP) => {
+  this.setTopP = (topP: number) => {
     return this.topP.att('topP', topP)
   }
 
-  this.setConfidence = (confidence) => {
+  this.setConfidence = (confidence: number) => {
     return this.confidence.att('confidence', confidence)
   }
 
-  this.setBargeConfidence = (bargeConfidence) => {
+  this.setBargeConfidence = (bargeConfidence: number) => {
     return this.bargeConfidence.att('bargeConfidence', bargeConfidence)
   }
 
-  this.setPresencePenalty = (presencePenalty) => {
+  this.setPresencePenalty = (presencePenalty: number) => {
     return this.presencePenalty.att('presencePenalty', presencePenalty)
   }
 
-  this.setFrequencyPenalty = (frequencyPenalty) => {
+  this.setFrequencyPenalty = (frequencyPenalty: number) => {
     return this.frequencyPenalty.att('frequencyPenalty', frequencyPenalty)
   }
 }
-Prompt.prototype = Object.create(TwiML.prototype);
-Prompt.prototype.constructor = Prompt;
+Prompt.prototype = Object.create(TwiML.prototype)
+Prompt.prototype.constructor = Prompt
 
 function PostPrompt(postPromptElement: Element) {
-  Prompt.call(this, postPromptElement);
-  this._propertyName = 'postPrompt';
+  Prompt.call(this, postPromptElement)
+  this._propertyName = 'postPrompt'
 }
-PostPrompt.prototype = Object.create(TwiML.prototype);
-PostPrompt.prototype.constructor = PostPrompt;
-
-export interface ExtendedConnect extends Connect {
-  ai(attributes?: any): void;
-}
+PostPrompt.prototype = Object.create(TwiML.prototype)
+PostPrompt.prototype.constructor = PostPrompt
 
 const getHost = (opts: { signalwireSpaceUrl?: string } = {}): string => {
   const { signalwireSpaceUrl } = opts

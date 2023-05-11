@@ -1,6 +1,7 @@
 const twilio = require('../lib')
 import { getHost, Reject, AI } from './helpers'
 import { Twilio, TwimlInterface, JwtInterface } from '../index'
+import { AIAttributes } from './types'
 import { CompatibilityAPIRestClientOptions, RestClient as RC } from '../compatibility-api'
 
 twilio.twiml.FaxResponse.prototype.reject = function (attributes: any) {
@@ -11,8 +12,8 @@ const connectRef = twilio.twiml.VoiceResponse.prototype.connect
 twilio.twiml.VoiceResponse.prototype.connect = function (attributes) {
   const self = this;
   const connect = connectRef.call(self, attributes)
-  connect.ai = () => {
-    return new AI(connect.connect.ele('AI', attributes));
+  connect.ai = (aIAttributes?: AIAttributes) => {
+    return new AI(connect.connect.ele('AI', aIAttributes));
   }
   return connect
 }
