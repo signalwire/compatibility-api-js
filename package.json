@@ -64,6 +64,8 @@
     "build": "npm run tsc && npm run tsc:esm"
   },
   "files": [
+    "dist-esm",
+    "dist-cjs",
     "lib",
     "index.js",
     "index.d.ts"
