@@ -1,5 +1,6 @@
 const twilio = require('../lib')
-import TwiML from '../lib/twiml/TwiML'
+const TwiML = require('../lib/twiml/TwiML')
+
 import {
   AIPostPromptAttributes,
   AIPromptAttributes,
