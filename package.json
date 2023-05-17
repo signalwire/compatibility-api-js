@@ -3,7 +3,7 @@
   "description": "SignalWire Compatibility API",
   "author": "SignalWire Team <open.source@signalwire.com>",
   "license": "MIT",
-  "version": "3.0.5",
+  "version": "3.1.0",
   "keywords": [
     "signalwire",
     "voice",
@@ -19,7 +19,7 @@
   "bugs": {
     "url": "https://github.com/signalwire/compatibility-api-js/issues"
   },
-  "homepage": "https://github.com/signalwire/compatibility-api-js/tree/master/packages/compatibility-api",
+  "homepage": "https://developer.signalwire.com/compatibility-api",
   "dependencies": {
     "axios": "^0.26.1",
     "dayjs": "^1.8.29",
