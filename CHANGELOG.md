@@ -8,5 +8,5 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ### Added
 
-- Add support for `AI` verb.
+- Add support for `AI` noun.
 - Validate the `X-SignalWire-Signature` header for the inbound request.
