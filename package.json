@@ -66,8 +66,7 @@
     "build": "node build.js"
   },
   "files": [
-    "dist-esm",
-    "dist-cjs",
+    "dist",
     "lib",
     "index.js",
     "index.d.ts"
