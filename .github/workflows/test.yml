@@ -1,4 +1,4 @@
-name: Test and Deploy
+name: Test
 on:
   push:
     branches: [main]
@@ -10,7 +10,7 @@ jobs:
   test:
     name: Test
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 10
     strategy:
       matrix:
         node: [ 14, 16, 18, lts/* ]

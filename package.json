@@ -3,7 +3,7 @@
   "description": "SignalWire Compatibility API",
   "author": "SignalWire Team <open.source@signalwire.com>",
   "license": "MIT",
-  "version": "3.0.5",
+  "version": "3.1.0",
   "keywords": [
     "signalwire",
     "voice",
@@ -19,7 +19,7 @@
   "bugs": {
     "url": "https://github.com/signalwire/compatibility-api-js/issues"
   },
-  "homepage": "https://github.com/signalwire/compatibility-api-js/tree/master/packages/compatibility-api",
+  "homepage": "https://developer.signalwire.com/compatibility-api",
   "dependencies": {
     "axios": "^0.26.1",
     "dayjs": "^1.8.29",
@@ -35,6 +35,8 @@
   },
   "devDependencies": {
     "@types/node": "9.6.57",
+    "esbuild": "^0.17.19",
+    "esbuild-node-externals": "^1.7.0",
     "eslint": "^7.28.0",
     "express": "^4.17.1",
     "jasmine": "~3.5.0",
@@ -61,17 +63,18 @@
     "nyc": "if [ `node --version | cut -d'.' -f1 | cut -c2-` -ge \"8\" ]; then npm run coverage; else npm test; fi",
     "tsc": "tsc -p tsconfig.cjs.json",
     "tsc:esm": "tsc -p tsconfig.esm.json",
-    "build": "npm run tsc && npm run tsc:esm"
+    "build": "node build.js"
   },
   "files": [
+    "dist",
     "lib",
     "index.js",
     "index.d.ts"
   ],
-  "main": "dist-cjs/index.js",
+  "main": "dist/index.node.js",
   "exports": {
-    "require": "./dist-cjs/index.js",
-    "default": "./dist-esm/index.js"
+    "require": "./dist/index.node.js",
+    "default": "./dist/index.node.mjs"
   },
   "types": "./compatibility-api.d.ts",
   "engines": {
