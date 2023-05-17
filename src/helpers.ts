@@ -1,5 +1,5 @@
-const twilio = require('../lib')
-const TwiML = require('../lib/twiml/TwiML')
+import twilio from '../lib'
+import TwiML from '../lib/twiml/TwiML'
 
 import {
   AIPostPromptAttributes,
