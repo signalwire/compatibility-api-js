@@ -10,3 +10,9 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 - Add support for `AI` noun.
 - Validate the `X-SignalWire-Signature` header for the inbound request.
+
+## [3.1.1] - 2023-06-28
+
+### Fixed
+
+- Fix typescript declaration.
