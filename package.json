@@ -3,7 +3,7 @@
   "description": "SignalWire Compatibility API",
   "author": "SignalWire Team <open.source@signalwire.com>",
   "license": "MIT",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "keywords": [
     "signalwire",
     "voice",
@@ -69,7 +69,8 @@
     "dist",
     "lib",
     "index.js",
-    "index.d.ts"
+    "index.d.ts",
+    "compatibility-api.d.ts"
   ],
   "main": "dist/index.node.js",
   "exports": {

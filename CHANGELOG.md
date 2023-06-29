@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.1.1] - 2023-06-28
+
+### Fixed
+
+- Fix typescript declaration.
+
 ## [3.1.0] - 2023-05-17
 
 ### Added
