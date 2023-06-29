@@ -3,7 +3,7 @@
   "description": "SignalWire Compatibility API",
   "author": "SignalWire Team <open.source@signalwire.com>",
   "license": "MIT",
-  "version": "3.1.1",
+  "version": "3.1.2",
   "keywords": [
     "signalwire",
     "voice",
