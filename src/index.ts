@@ -2,7 +2,7 @@ import twilio from '../lib'
 import { getHost, Reject, AI } from './helpers'
 import { Twilio, TwimlInterface, JwtInterface } from '../index'
 import { AIAttributes } from './types'
-import type { CompatibilityAPIRestClientOptions, RestClient as RC } from '../compatibility-api'
+import type { CompatibilityAPIRestClientOptions, CompatibilityApi } from '../compatibility-api'
 
 twilio.twiml.FaxResponse.prototype.reject = function (attributes: any) {
   return new Reject(this.response.ele('Reject', attributes))
@@ -22,7 +22,7 @@ const RestClient = function (
   username: string,
   token: string,
   opts?: CompatibilityAPIRestClientOptions
-): RC.Twilio {
+): CompatibilityApi {
   const host = getHost(opts)
   // "AC" prefix because twilio-node requires it
   const client = twilio('AC' + username, token, opts)
