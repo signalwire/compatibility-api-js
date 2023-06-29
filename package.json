@@ -68,6 +68,7 @@
   "files": [
     "dist",
     "lib",
+    "src",
     "index.js",
     "index.d.ts",
     "compatibility-api.d.ts"
