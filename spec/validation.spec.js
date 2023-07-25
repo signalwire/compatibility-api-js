@@ -29,40 +29,92 @@ const bodySignatureEmpty = '44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c0
 const requestUrlWithHashEmpty = requestUrl + '&bodySHA256=' + bodySignatureEmpty;
 
 describe('Request validation', () => {
+  beforeEach(function(){
+    spyOn(console, 'warn')
+  })
+
+  const expectWarnToHaveBeenCalled = () => {
+    expect(console.warn).toHaveBeenCalled()
+  }
+
+  const expectWarnToNotHaveBeenCalled = () => {
+    expect(console.warn).not.toHaveBeenCalled()
+  }
+
   it('should succeed with the correct signature', () => {
     const isValid = validateRequest(token, defaultSignature, requestUrl, defaultParams);
 
     expect(isValid).toBeTruthy();
+    expectWarnToNotHaveBeenCalled();
   });
 
   it('should fail when given the wrong signature', () => {
     const isValid = validateRequest(token, 'WRONG_SIGNATURE', requestUrl, defaultParams);
 
     expect(isValid).toBeFalsy();
+    expectWarnToNotHaveBeenCalled();
   });
+
+  const relayTestCasesWithParams = [
+    { project_id: 'foo' },
+    { call_id: 'call_id' },
+    { message_id: 'message_id' },
+    { call: { project_id: 'foo' } },
+  ]
+  relayTestCasesWithParams.forEach((testCase) => {
+    it(`should fail when given the wrong signature and show the warning if the params contains a Relay field ${JSON.stringify(testCase)}`, () => {
+      const relayParams = {
+        ...defaultParams,
+        ...testCase
+      }
+      const isValid = validateRequest(token, 'WRONG_SIGNATURE', requestUrl, relayParams);
+  
+      expect(isValid).toBeFalsy();
+      expectWarnToHaveBeenCalled();
+    });
+  })
+
+  const relayTestCasesWithQueryString = [
+    'project_id=foo',
+    'call_id=call_id',
+    'message_id=message_id',
+  ]
+  relayTestCasesWithQueryString.forEach((testCase) => {
+    it(`should fail when given the wrong signature and show the warning if the queryString contains a Relay field ${JSON.stringify(testCase)}`, () => {
+      const url = `${requestUrl}&${testCase}`
+      const isValid = validateRequest(token, 'WRONG_SIGNATURE', url, defaultParams);
+  
+      expect(isValid).toBeFalsy();
+      expectWarnToHaveBeenCalled();
+    });
+  })
 
   it('should validate post body correctly', () => {
     const isValid = validateBody(body, bodySignature);
 
     expect(isValid).toBeTruthy();
+    expectWarnToNotHaveBeenCalled();
   });
 
   it('should fail to validate with wrong sha', () => {
     const isValid = validateBody(body, 'WRONG_HASH');
 
     expect(isValid).toBeFalsy();
+    expectWarnToNotHaveBeenCalled();
   });
 
   it('should validate request body when given', () => {
     const isValid = validateRequestWithBody(token, requestUrlWithHashSignature, requestUrlWithHash, body);
 
     expect(isValid).toBeTruthy();
+    expectWarnToNotHaveBeenCalled();
   });
 
   it('should validate request body when empty', () => {
     const isValid = validateRequestWithBody(token, requestUrlWithHashSignatureEmptyBody, requestUrlWithHashEmpty, '{}');
 
     expect(isValid).toBeTruthy();
+    expectWarnToNotHaveBeenCalled();
   });
 
   it('should validate request body with only sha param', () => {
@@ -71,18 +123,21 @@ describe('Request validation', () => {
     const isValid = validateRequestWithBody(token, 'y77kIzt2vzLz71DgmJGsen2scGs=', shortUrl, body);
 
     expect(isValid).toBeTruthy();
+    expectWarnToNotHaveBeenCalled();
   });
 
   it('should fail validation if given body but no bodySHA256 param', () => {
     const isValid = validateRequestWithBody(token, defaultSignature, requestUrl, defaultParams, body);
 
     expect(isValid).toBeFalsy();
+    expectWarnToNotHaveBeenCalled();
   });
 
   it('should fail when signature undefined', () => {
     const isValid = validateRequest(token, undefined, requestUrl, defaultParams);
 
     expect(isValid).toBeFalsy();
+    expectWarnToNotHaveBeenCalled();
   });
 
   it('should validate https urls with ports by stripping them', () => {
@@ -90,6 +145,7 @@ describe('Request validation', () => {
     const isValid = validateRequest(token, defaultSignature, requestUrlWithPort, defaultParams);
 
     expect(isValid).toBeTruthy();
+    expectWarnToNotHaveBeenCalled();
   });
 
   it('should validate http urls with ports', () => {
@@ -99,6 +155,7 @@ describe('Request validation', () => {
     const isValid = validateRequest(token, signature, requestUrlWithPort, defaultParams);
 
     expect(isValid).toBeTruthy();
+    expectWarnToNotHaveBeenCalled();
   });
 
   it('should validate https urls without ports by adding standard port 443', () => {
@@ -106,6 +163,7 @@ describe('Request validation', () => {
     const isValid = validateRequest(token, signature, requestUrl, defaultParams);
 
     expect(isValid).toBeTruthy();
+    expectWarnToNotHaveBeenCalled();
   });
 
   it('should validate http urls without ports by adding standard port 80', () => {
@@ -114,6 +172,7 @@ describe('Request validation', () => {
     const isValid = validateRequest(token, signature, requestUrlHttp, defaultParams);
 
     expect(isValid).toBeTruthy();
+    expectWarnToNotHaveBeenCalled();
   });
 
   it('should validate urls with credentials', () => {
@@ -122,6 +181,7 @@ describe('Request validation', () => {
     const isValid = validateRequest(token, signature, urlWithCreds, defaultParams);
 
     expect(isValid).toBeTruthy();
+    expectWarnToNotHaveBeenCalled();
   });
 
   it('should validate urls with just username', () => {
@@ -130,6 +190,7 @@ describe('Request validation', () => {
     const isValid = validateRequest(token, signature, urlWithCreds, defaultParams);
 
     expect(isValid).toBeTruthy();
+    expectWarnToNotHaveBeenCalled();
   });
 
   it('should validate urls with credentials by adding port', () => {
@@ -138,6 +199,7 @@ describe('Request validation', () => {
     const isValid = validateRequest(token, signature, urlWithCreds, defaultParams);
 
     expect(isValid).toBeTruthy();
+    expectWarnToNotHaveBeenCalled();
   });
 
   it('should validate urls with special characters', () => {
@@ -146,6 +208,7 @@ describe('Request validation', () => {
     const isValid = validateRequest(token, signature, specialRequestUrl, defaultParams);
 
     expect(isValid).toBeTruthy();
+    expectWarnToNotHaveBeenCalled();
   });
 
   it('should validate request body with an array parameter', () => {
@@ -154,6 +217,7 @@ describe('Request validation', () => {
     const isValid = validateRequest(token, signature, requestUrl, paramsWithArray);
 
     expect(isValid).toBeTruthy();
+    expectWarnToNotHaveBeenCalled();
   });
 });
 
