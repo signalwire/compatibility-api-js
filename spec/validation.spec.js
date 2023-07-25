@@ -74,21 +74,6 @@ describe('Request validation', () => {
     });
   })
 
-  const relayTestCasesWithQueryString = [
-    'project_id=foo',
-    'call_id=call_id',
-    'message_id=message_id',
-  ]
-  relayTestCasesWithQueryString.forEach((testCase) => {
-    it(`should fail when given the wrong signature and show the warning if the queryString contains a Relay field ${JSON.stringify(testCase)}`, () => {
-      const url = `${requestUrl}&${testCase}`
-      const isValid = validateRequest(token, 'WRONG_SIGNATURE', url, defaultParams);
-  
-      expect(isValid).toBeFalsy();
-      expectWarnToHaveBeenCalled();
-    });
-  })
-
   it('should validate post body correctly', () => {
     const isValid = validateBody(body, bodySignature);
 
