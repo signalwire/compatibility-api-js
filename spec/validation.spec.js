@@ -74,6 +74,13 @@ describe('Request validation', () => {
     });
   })
 
+  it(`should fail when given the wrong signature and skip the warning with suppressWarning if the params contains a Relay field`, () => {
+    const isValid = validateRequest(token, 'WRONG_SIGNATURE', requestUrl, defaultParams, true);
+
+    expect(isValid).toBeFalsy();
+    expectWarnToNotHaveBeenCalled();
+  });
+
   it('should validate post body correctly', () => {
     const isValid = validateBody(body, bodySignature);
 
