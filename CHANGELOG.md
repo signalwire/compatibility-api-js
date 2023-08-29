@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.1.4] - 2023-08-30
+
+### Fixed
+
+- Restore `create()` and `update()` methods on FaxInstance and FaxListInstance namespaces.
+
 ## [3.1.3] - 2023-08-04
 
 ### Changed
