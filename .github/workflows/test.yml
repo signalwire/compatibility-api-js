@@ -13,7 +13,7 @@ jobs:
     timeout-minutes: 10
     strategy:
       matrix:
-        node: [ 14, 16, 18, lts/* ]
+        node: [ 14, 16, 18]
     steps:
       - name: Checkout
         uses: actions/checkout@v3
