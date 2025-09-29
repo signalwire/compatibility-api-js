@@ -80,7 +80,7 @@
   },
   "types": "./compatibility-api.d.ts",
   "engines": {
-    "node": ">=12"
+    "node": ">=16"
   },
   "overrides": {
     "@types/mdurl": "1.0.5"
