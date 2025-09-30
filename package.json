@@ -3,7 +3,7 @@
   "description": "SignalWire Compatibility API",
   "author": "SignalWire Team <open.source@signalwire.com>",
   "license": "MIT",
-  "version": "3.1.4",
+  "version": "3.2.0",
   "keywords": [
     "signalwire",
     "voice",
@@ -21,7 +21,7 @@
   },
   "homepage": "https://developer.signalwire.com/compatibility-api",
   "dependencies": {
-    "axios": "^1.6.2",
+    "axios": "^1.12.2",
     "dayjs": "^1.8.29",
     "https-proxy-agent": "^5.0.0",
     "jsonwebtoken": "9.0.0",
@@ -80,6 +80,9 @@
   },
   "types": "./compatibility-api.d.ts",
   "engines": {
-    "node": ">=12"
+    "node": ">=16"
+  },
+  "overrides": {
+    "@types/mdurl": "1.0.5"
   }
 }

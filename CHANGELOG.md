@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.2.0] - 2025-09-30
+
+### Changed
+
+- Update axios dependency to 1.12.2 to address security vulnerability (CVE-2024-39338).
+- Drop support for Node.js 14 (EOL) - minimum supported version is now Node.js 16.
+- Update CI testing to Node.js 16, 18, and 20.
+
+### Fixed
+
+- Add mdurl type override to resolve dependency conflicts.
+
 ## [3.1.4] - 2023-08-30
 
 ### Fixed
