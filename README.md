@@ -10,6 +10,44 @@ Read the implementation documentation, guides and API Reference at the official 
 
 ---
 
+## Node.js Version Support
+
+As of version 3.2.0, this library requires Node.js 16 or higher. Support for Node.js 14 (which reached end-of-life in April 2023) has been dropped.
+
+### Using with Node.js 14
+
+If you need to use this library with Node.js 14, you have two options:
+
+**Option 1: Install the last compatible version (recommended)**
+
+```bash
+npm install @signalwire/compatibility-api@3.1.4
+```
+
+**Option 2: Override dependencies (advanced, not recommended)**
+
+If you absolutely must use the latest version with Node.js 14, you can attempt to override the engine check and axios version, though this is not tested or supported:
+
+```json
+{
+  "dependencies": {
+    "@signalwire/compatibility-api": "^3.2.0"
+  },
+  "overrides": {
+    "@signalwire/compatibility-api": {
+      "axios": "^1.6.2"
+    }
+  },
+  "engines": {
+    "node": ">=14"
+  }
+}
+```
+
+**Note:** This override approach may result in security vulnerabilities or unexpected behavior. We strongly recommend upgrading to Node.js 16 or higher.
+
+---
+
 ## Contributing
 
 SignalWire Compatibility SDK is open source and maintained by the SignalWire team, but we are very grateful for [everyone](https://github.com/signalwire/compatibility-api-js/contributors) who has contributed and assisted so far.
